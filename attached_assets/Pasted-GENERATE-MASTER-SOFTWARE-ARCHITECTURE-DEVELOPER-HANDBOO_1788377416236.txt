@@ -1,0 +1,56 @@
+GENERATE MASTER SOFTWARE ARCHITECTURE & DEVELOPER HANDBOOK (.MD - DOWNLOAD ONLY)
+
+Please generate a single, highly technical, exhaustive Markdown document named `YOUSIFI_SOFT_MASTER_HANDBOOK.md` for "اليوسفي سوفت" (Yousifi Soft).
+
+IMPORTANT INSTRUCTION: 
+DO NOT persist or commit this file to the git repository. Add a temporary download button inside `/settings` labeled "تحميل كراس المطور والدليل الهندسي الشامل (MD)" that triggers an instant Blob file download to the user's local device.
+
+The Markdown document must be written with maximum depth and precision so that any AI or human software engineer can read it and immediately continue development, refactoring, or maintenance without asking any preliminary questions.
+
+Structure the handbook into the following structured sections:
+
+==================================================
+SECTION 1: SYSTEM ENVIRONMENT, TECH STACK & ARCHITECTURE
+==================================================
+- Full Technology Stack: React 19, TypeScript, Vite, Tailwind CSS, Capacitor Native Android, Offline-First Local Storage / SQLite.
+- Core Architectural Paradigm: 100% Offline-First execution, Local State Management, Event Listeners for Native Intents.
+- UI/UX System & Dark Mode Laws: Strict CSS rules (`.dark:bg-slate-900` card containers, `#ffffff` white text, `#cbd5e1` muted labels, `#f97316` amber/orange numbers). POS Tile simplifications.
+- Application Versioning & Auto-Changelog Workflow: How `src/data/changelog.ts` increments versions automatically, stores history permanently against resets, and drives the first-launch modal.
+
+==================================================
+SECTION 2: DATABASE SCHEMAS, TABLES, RELATIONS & STATE
+==================================================
+- Complete Schema Definitions in Markdown Tables (Field Name, Data Type, Constraints, Description) for:
+  1. `customers` (ID, Name, Phone, Credit Limit, Debt Balance, CreatedAt, UpdatedAt).
+  2. `card_types` / `inventory` (ID, Card Name, Purchase Price, Selling Price, Stock Quantity, IsActive).
+  3. `sales` (ID, Customer ID, Card Type ID, Quantity, Total Amount, Paid Amount, Debt Amount, Sale Type [Cash/Credit], Date).
+  4. `debt_transactions` (ID, Customer ID, Amount Paid, Transaction Type [Repayment/Debt Addition], Date, Notes).
+  5. `supplier_accounts` (ID, Supplier Name, Total Purchases, Total Paid, Balance Payable).
+  6. `app_settings` (WhatsApp Package Name, Auto-Backup Directory, Password Hash, Backup Counter).
+- Entity Relationship Diagram (ERD) mapping: Relational links between Customers <-> Sales <-> Debt Transactions, and Inventory <-> Sales.
+
+==================================================
+SECTION 3: CORE ALGORITHMS & CALCULATIVE FORMULAS
+==================================================
+- Financial Calculations:
+  * Daily Cash Income = (Sales Paid Cash Today + Customer Debt Repayments Collected Today).
+  * Net Customer Debt Balance updates upon credit sales or repayments.
+  * Supplier Ledger Balance deductions.
+  * Card Profitability = (Selling Price - Purchase Price) * Sold Quantity.
+- Data Resiliency & Backup Algorithms:
+  * FIFO Rotating Auto-Backup Policy (max 20 local snapshot files, auto-purging oldest).
+  * Two-Tier Reset Logic: "Full Reset" vs. "Partial Reset" (wiping sales/debt/history while preserving Customers, Card Types, and App Settings).
+
+==================================================
+SECTION 4: NATIVE ANDROID INTEGRATIONS & EXCEPTION GUARDRAILS
+==================================================
+- Silent Background SMS Dispatching: Native Java `SmsManager` implementation and permissions.
+- Bulk SMS Filtering & Dynamic Templating: Debtor filter (Debt > 0), Non-Debtor filter (Debt = 0), All Customers, and string replacement for `{الاسم}`.
+- Custom WhatsApp Intent Routing: Package Name selection (`com.whatsapp` vs `com.whatsapp.w4b`).
+- Contact Sharing & Import: `.vcf` File Intent Filter parsing and in-app contact search/uncheck-by-default logic.
+- Unhandled Exception Safeguards:
+  * Boot-time fallback handling for missing backup snapshots.
+  * Native file picker `AbortError` suppression via `try-catch` blocks.
+  * Java Native `FileNotFoundException` and `IOException` try-catch wrappers inside `BackupDirectoryPlugin.java`.
+
+Render this Markdown document with clear headers (#, ##, ###), code blocks, and formatted tables.

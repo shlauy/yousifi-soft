@@ -1,0 +1,2 @@
+- [Google Drive backups](google-drive-backups.md) — keep Drive OAuth and appDataFolder file operations behind the API server for this local-first PWA.
+- [Local Android builds](local-android-builds.md) — this workspace may lack Android SDK components; use the Java 21 GitHub Actions workflow for APK verification.

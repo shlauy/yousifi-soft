@@ -1,0 +1,45 @@
+STANDALONE PROFIT PAGE, ZERO-EXPENSE MODEL, REMOVE MD HANDBOOK CARD & GITHUB ACTIONS APK COMPATIBILITY
+
+Please implement the dedicated Profit Page, adjust the Fund model, remove unnecessary handbook downloads, and verify GitHub Actions/APK build readiness according to these strict requirements:
+
+1. REMOVE HANDBOOK DOWNLOAD CARD FROM SETTINGS
+- Completely remove/delete the "تحميل كراس المطور والدليل الهندسي الشامل (MD)" card/button from the Settings page (`src/App.tsx` or settings views).
+- Remove any associated download/generation triggers for `master-handbook.ts` in the UI.
+
+2. SETTINGS TOGGLE & ROUTING FOR PROFIT PAGE
+- Add a toggle switch in Settings: "تفعيل شاشة إدارة الأرباح والمسحوبات" (Enable Profit Management Page).
+- When enabled: Add "الأرباح" tab to bottom navigation and register route `/profit`.
+- When disabled: Hide tab and block route without affecting other pages.
+
+3. ACCOUNTS PAGE SIMPLIFICATION (ZERO-OPERATIONAL-EXPENSE MODEL)
+- Remove/Hide generic operational "سحب / مصروف" buttons from Accounts page, as there are zero operational overheads.
+- Keep only "دفعة مورد" and "إيداع للصندوق" in Accounts.
+- Fund Balance strictly represents: `Total Cash Sales + Debt Repayments + Fund Injections - Supplier Payments - Owner Withdrawals`.
+
+4. DEDICATED PROFIT PAGE (`/profit`) & DRAWINGS LOGIC
+- Top Summary Cards:
+  1. إجمالي الأرباح الدفترية (Accrued Sales Profit).
+  2. الأرباح المحصلة نقداً (Realized Cash Profit from cash sales + debt collections).
+  3. إجمالي المسحوبات الشخصية (Total Owner Profit Withdrawals).
+  4. رصيد الأرباح المتاح للسحب (Available Retained Profit = Realized Cash Profit - Total Owner Draws).
+- Overdraw Alert: If Available Retained Profit < 0, highlight card in Red (`dark:bg-red-950/40 border-red-500`) with "عجز مسحوبات على المكشوف".
+- Actions on Profit Page:
+  * "سحب أرباح" (Owner Draw): Deducts directly from Fund balance and logs PROFIT_WITHDRAWAL.
+  * "سحب مؤقت / عهدة" (Temporary Drawing): Deducts from Fund balance and logs TEMPORARY_DRAWING.
+  * Settle Temporary Drawing: Options to "إرجاع للصندوق" (Restores Fund) or "تحويل إلى سحب أرباح" (Converts to PROFIT_WITHDRAWAL).
+
+5. AUTOMATIC SUPPLIER STOCK RETURNS (إرجاع الكروت للمورد تلقائياً)
+- When registering a Supplier Return (إرجاع كروت للمورد):
+  1. Automatically reduce stock quantity (`card.quantity`) for the selected card type by the returned amount.
+  2. Automatically reduce Supplier Payable Balance (`balance_payable`) by `returnedQuantity * purchasePrice`.
+  3. Keep completed sales and historical realized profits untouched.
+
+6. GITHUB ACTIONS & APK BUILD VERIFICATION
+- Verify `<base href="./">` configuration in Vite/index.html and Capacitor path mappings (`dist/`).
+- Ensure `npx cap sync android` syncs cleanly and that all native Java files (`MainActivity.java`, `MessagingPlugin.java`, `BackupDirectoryPlugin.java`) have no unmerged syntax or import errors.
+- Ensure TypeScript checking and Vite production builds complete without any warning/error breaks.
+
+7. AUDIT LOG & VALIDATION
+- Render a timeline table in `/profit` for all profit and withdrawal movements with date filters.
+- Update `src/data/changelog.ts` with these features.
+- Run `pnpm --filter @workspace/alyousifi-soft run typecheck` and `npm run build` to confirm clean compilation for GitHub Actions CI/CD.

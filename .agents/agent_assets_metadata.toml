@@ -1,0 +1,30 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "5FmtArgVdM0yX80U93atg"
+uri = "file://yousifi-soft-github.zip"
+type = "unspecified"
+title = "اليوسفي سوفت — الإصدار 1.0.14"
+description = "حزمة المشروع النهائية بعد إعادة هيكلة صفحة الإعدادات، إصلاح فقدان تركيز الحقول، احتواء مسارات النسخ، accordions، وتنظيف بطاقة قاعدة البيانات المحلية. تم التحقق من سلامة ZIP."
+logical_id = "336d4c01-07a9-4a4f-8073-947686b5a09d"
+content_hash = "sha256:a6c039ed9254f135e8c3ae0ec79ce9a40c10dda62c507f2bdfcf908c66477762"
+size = 2846557
+mtime_ms = 1788386803805
+storage_uri = "gcs://replit-rams-assets-sisko/rams/assets/repl:d02d91e9-0675-44dd-b61f-d6945029c509/336d4c01-07a9-4a4f-8073-947686b5a09d/0c968422-f3e2-43d0-b99a-0c6ac57e176a"
+storage_version_token = "1788386818739377"
+content_type = "application/octet-stream"
+
+[[outputs]]
+id = "hyv3B0HhcIhKWAem_vmvD"
+uri = "file://GITHUB_INSTRUCTIONS.txt"
+type = "text"
+title = "دليل رفع وبناء APK"
+description = "تعليمات عربية خطوة بخطوة لفك الضغط والرفع إلى GitHub وتشغيل Actions وتنزيل app-release.apk."
+logical_id = "d2eb601c-f8fd-4ab8-bb09-f1aba93c1389"
+content_hash = "sha256:28a09c443cba6d2ecce77913c4d187e92fc839d3247f15acacb104dc13b005df"
+size = 5822
+mtime_ms = 1788312583271
+storage_uri = "gcs://replit-rams-assets-sisko/rams/assets/repl:d02d91e9-0675-44dd-b61f-d6945029c509/d2eb601c-f8fd-4ab8-bb09-f1aba93c1389/70bad2ad-94b4-42b7-8400-beb5054dbab2"
+storage_version_token = "1788312646368598"
+content_type = "text/plain"

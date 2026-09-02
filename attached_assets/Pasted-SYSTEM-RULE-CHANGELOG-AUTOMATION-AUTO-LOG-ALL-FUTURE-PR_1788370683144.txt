@@ -1,0 +1,43 @@
+SYSTEM RULE & CHANGELOG AUTOMATION: AUTO-LOG ALL FUTURE PROMPTS + RELEASE NOTES SYSTEM
+
+==================================================
+1. MANDATORY AUTOMATION RULE FOR ALL FUTURE PROMPTS
+==================================================
+From now on, for EVERY task, bug fix, or feature request you execute:
+- AUTOMATICALLY update `src/data/changelog.ts`.
+- INCREMENT the app version (e.g., from v1.2.0 to v1.2.1 or v1.3.0).
+- ADD a new changelog entry at the top of the array with the current date, new version, `isLatest: true`, and bullet points summarizing what you just built/fixed.
+- Set `isLatest: false` on all older entries.
+- YOU MUST DO THIS AUTOMATICALLY WITHOUT THE USER REMINDING YOU.
+
+==================================================
+2. CHANGELOG DATA STRUCTURE & PERMANENT STORAGE
+==================================================
+- Create `src/data/changelog.ts` to store update entries permanently.
+- Ensure changelog data is hardcoded/imported as code so it is NEVER erased by any data resets (Full or Partial reset).
+- Structure per entry:
+  * `version`: string (e.g. "v1.2.0")
+  * `date`: string (e.g. "2026-09-02")
+  * `isLatest`: boolean
+  * `features`: string array (detailed Arabic list of changes)
+
+==================================================
+3. FIRST-LAUNCH / POST-UPDATE AUTOMATIC POPUP MODAL
+==================================================
+- On app startup, compare current app version with `localStorage.getItem('last_seen_version')`.
+- If the app was just installed OR updated to a new version, automatically show the "سجل التحديثات والتطويرات" modal ONCE on boot.
+- Display a bright green badge **"جديد NEW"** next to the latest version entry.
+- When the user closes the modal, store the current version in `localStorage` so it won't pop up again until the next update.
+
+==================================================
+4. SETTINGS ACCESS BUTTON
+==================================================
+- In `/settings`, add a button: **"سجل التحديثات والتطويرات"** (with History/Sparkles icon).
+- Clicking this button opens the Release Notes modal showing all history sorted from newest to oldest.
+
+==================================================
+5. BUILD & RE-PACKAGE FOR GITHUB ACTIONS
+==================================================
+- Run full production build: `npm run build`
+- Sync Capacitor assets: `npx cap sync android`
+- Compress the updated repository into `yousifi-soft-github.zip` ready for GitHub Actions deployment.

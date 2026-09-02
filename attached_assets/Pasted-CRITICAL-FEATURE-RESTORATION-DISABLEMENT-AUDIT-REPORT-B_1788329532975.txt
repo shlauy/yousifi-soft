@@ -1,0 +1,38 @@
+CRITICAL FEATURE RESTORATION & DISABLEMENT AUDIT REPORT
+
+Before proceeding with the code updates, please provide a clear explanation regarding the disabled native features.
+
+==================================================
+PART 1: AUDIT & EXPLANATION REQUEST
+==================================================
+1. Why were the Contacts Import features and Background Database Backup disabled or removed during the recent architecture migration?
+2. What OTHER features, components, services, or native permissions were disabled, removed, or commented out during the SPA/Capacitor migration process? Please provide a detailed list.
+
+==================================================
+PART 2: CRITICAL FEATURE RESTORATION
+==================================================
+Please restore the following 3 native features in "Yousifi Soft" (اليوسفي سوفت) for both the React client UI and Capacitor Android layer without modifying the pure client-side SPA architecture:
+
+1. BULK CONTACTS IMPORT (صفحة العملاء - استيراد جماعي):
+   - Re-enable the "استيراد جماعي" button on the Customers page (`/customers`).
+   - Integrate native Contacts API (via `@capacitor-community/contacts` or Capacitor Contacts plugin).
+   - Request `READ_CONTACTS` permission dynamically at runtime.
+   - Fetch device contacts, display a bulk multi-selection modal, and import selected entries into the local SQLite/LocalStorage Customer schema (mapping Contact Name -> Customer Name, Phone -> Customer Phone).
+
+2. SINGLE CONTACT IMPORT IN NEW CUSTOMER MODAL (إضافة عميل جديد - استيراد رقم الهاتف):
+   - Re-enable the "استيراد من جهات الاتصال" button/icon next to the Phone field inside the "إضافة عميل جديد" Modal.
+   - Launch native Contact Picker upon click, retrieve the chosen contact's name and phone number, and auto-fill the form fields.
+
+3. AUTOMATIC BACKGROUND DATABASE BACKUP ON APP EXIT (النسخ الاحتياطي الدوري):
+   - Listen to Capacitor App State changes (`App.addListener('appStateChange', ...)`).
+   - When `isActive` becomes false (app goes to background or user exits), silently generate a complete JSON/SQLite database export and save it securely into local persistent storage / Documents directory.
+   - Add a toggle switch in Settings ("النسخ الاحتياطي التلقائي عند الخروج") enabled by default.
+
+==================================================
+PART 3: PERMISSIONS & CAPACITOR CONFIGURATION
+==================================================
+- Add required permissions to `android/app/src/main/AndroidManifest.xml`:
+  * `<uses-permission android:name="android.permission.READ_CONTACTS" />`
+  * `<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28" />`
+- Run `npm run build` and `npx cap sync android` to ensure all native plugins are linked cleanly.
+- Bundle the updated repository, assets, and GitHub workflows into `yousifi-soft-github.zip`.

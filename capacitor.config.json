@@ -1,0 +1,6 @@
+{
+  "appId": "com.alyousifisoft.app",
+  "appName": "اليوسفي سوفت",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}

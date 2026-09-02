@@ -1,0 +1,38 @@
+UI/UX FIX: DARK MODE CONTRAST REPAIR, QUICK SALE SIMPLIFICATION & SETTINGS OVERHAUL
+
+Please perform the following visual and textual fixes across Customer Details (`/customers/:id`) and Settings (`/settings`):
+
+==================================================
+1. FIX DARK MODE CONTRAST ON CUSTOMER PROFILE CARD (`/customers/:id`)
+==================================================
+- Issue: In Dark Mode, the main Customer Header Card flips to a light cream background while preserving light text color, rendering name, phone, and limit invisible.
+- Fix: Force the main Customer Header Card to retain a deep slate/charcoal background (`bg-slate-900` or `#1e293b`) in Dark Mode (`.dark`).
+- Text Styling in Dark Mode:
+  * Customer Name: High-contrast White (`#ffffff`).
+  * Phone & Credit Limit Label: High-contrast Muted Light Slate (`#cbd5e1`).
+  * Current Debt Value: High-contrast Vibrant Orange/Amber text (`#f97316` or `#fbbf24`).
+
+==================================================
+2. SIMPLIFY QUICK SALE TILES IN CUSTOMER PROFILE (`/customers/:id`)
+==================================================
+- Under "بيع سريع للعميل", simplify all card tiles.
+- REMOVE Price text (e.g. "100 ريال") and Stock text (e.g. "متوفر").
+- Display ONLY the Card Name (e.g. "كرت شبكة 100") centered in a clean, high-contrast touch tile.
+
+==================================================
+3. FIX DARK MODE & OVERHAUL ABOUT CARD IN SETTINGS (`/settings`)
+==================================================
+- Fix Dark Mode Contrast: The bottom "اليوسفي سوفت" card currently turns light cream in Dark Mode with invisible white text. Change its Dark Mode container background to dark charcoal (`#1e293b` / `bg-slate-900`) with high-contrast text (`#ffffff` and `#cbd5e1`).
+- Text Update: Change "نظام محاسبي ودفتر بيع محلي يعمل بدون إنترنت 100%." to:
+  **"نظام إدارة المبيعات نقداً / آجل"**
+- Add System Highlights / Feature Overview Section:
+  Include a clean bulleted list inside the card highlighting app core features:
+  * إدارة المبيعات والديون للعملاء بكل سهولة.
+  * استيراد جهات الاتصال وتسديد الديون جزئياً أو كلياً.
+  * نسخ احتياطي تلقائي ويدوي يعمل بدون إنترنت 100%.
+
+==================================================
+4. BUILD & PACKAGE
+==================================================
+- Verify Vite build (`npm run build`) and sync android (`npx cap sync android`).
+- Update `yousifi-soft-github.zip` package for deployment via GitHub Actions.

@@ -1,0 +1,38 @@
+HOME & ACCOUNTS RESTRUCTURING WITH STRICT DARK MODE CONTRAST FIX
+
+Please execute the dashboard reorganization, Accounts page updates, and enforce strict Dark Mode contrast rules:
+
+==================================================
+1. RESTRUCTURE "ملخص اليوم" (DAILY SUMMARY CARD)
+==================================================
+- Top line: Display current Date and Day in Arabic (e.g. "الأربعاء، 2 سبتمبر 2026").
+- Main Metric: Display "إجمالي الدخل النقدي اليومي" (Sales Paid Cash Today + Customer Debt Repayments Collected Today).
+
+==================================================
+2. RELOCATE DAILY METRIC DETAILS TO BOTTOM CARDS
+==================================================
+- Move the 4 detailed metrics into the 4 bottom grid cards on the Home Page:
+  1. Card "رصيد الصندوق": Display "مبيعات اليوم نقداً".
+  2. Card "ديون العملاء": Display "مبيعات اليوم دين".
+  3. Card "للمورد": Display "قيمة الدين الذي تم تسديده اليوم".
+  4. Card "المخزون الحالي": Display "عدد الكروت التي تم بيعها اليوم" + Total Sale Value + Net Profit Amount.
+
+==================================================
+3. NEW CARDS IN "الحسابات" (ACCOUNTS PAGE)
+==================================================
+- Add "ديون العملاء" card side-by-side with "رصيد الصندوق".
+- Add "المخزون الحالي" card (showing total potential sale value) side-by-side with "حساب المورد".
+
+==================================================
+4. STRICT DARK MODE CONTRAST ENFORCEMENT (CRITICAL)
+==================================================
+- Ensure ALL new and relocated cards in both Home and Accounts pages use explicit dark backgrounds in Dark Mode (`.dark:bg-slate-900` or `.dark:bg-slate-800`).
+- NEVER allow cards to revert to light cream or beige backgrounds in Dark Mode.
+- All primary text must be High-Contrast White (`#ffffff`), secondary text Muted Slate (`#cbd5e1`), and monetary values Highlighted Amber/Orange (`#f97316`).
+
+==================================================
+5. AUTOMATED CHANGELOG & BUILD
+==================================================
+- Auto-increment version in `src/data/changelog.ts` with a new log entry.
+- Run `npm run build` and `npx cap sync android`.
+- Re-package into `yousifi-soft-github.zip` ready for GitHub Actions.

@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "اليوسفي سوفت"
+description = "تطبيق إدارة بيع كروت الشبكات ومتابعة العملاء والديون والمورد والمخزون والأرباح، مصمم للعمل دون اتصال وبواجهة عربية بسيطة وسريعة."
+version = "1.0.0"
+id = "artifacts/alyousifi-soft"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18928
+
+[services.development]
+run = "pnpm --filter @workspace/alyousifi-soft run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/alyousifi-soft", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/alyousifi-soft/dist"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18928"
+BASE_PATH = "/"

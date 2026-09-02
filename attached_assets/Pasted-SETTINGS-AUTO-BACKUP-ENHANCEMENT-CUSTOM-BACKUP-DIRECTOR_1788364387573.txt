@@ -1,0 +1,36 @@
+SETTINGS & AUTO-BACKUP ENHANCEMENT: CUSTOM BACKUP DIRECTORY, UNIFIED AUTO-RESTORE, AND 20-FILE ROTATION
+
+Please update the background auto-backup system and Settings page (`/settings`) to support custom backup directories, synchronized restoration paths, and retention limits:
+
+==================================================
+1. DEFAULT & CUSTOM AUTO-BACKUP DIRECTORY SELECTION
+==================================================
+- Default Storage: By default, the exit background auto-backup writes files into the app's native persistent storage (`Directory.Data` / `files/backups/`).
+- Custom Directory Option: Add a setting inside `/settings` called **"مجلد النسخ الاحتياطي التلقائي"** (Auto-Backup Directory).
+- Functionality: Allow the user to click and select a custom local directory (such as a Google Drive synced local folder, Documents, or SD card folder) using native folder picker / Capacitor Filesystem API.
+- Dynamic Persistence: Store this chosen folder path in settings so all future automated exit backups write directly to this newly selected directory.
+
+==================================================
+2. SYNCHRONIZED AUTO-RESTORE PATH
+==================================================
+- Update the **"استعادة أحدث نسخة تلقائية"** (Restore Latest Auto-Backup) button logic:
+  * Automatically scan the currently active Auto-Backup Directory (the custom chosen directory if set, or the default app directory if unchanged).
+  * Locate the latest timestamped JSON backup file in that exact directory and restore the SQLite/LocalStorage database with one click.
+
+==================================================
+3. MANUAL BACKUP LOCATION & 20-FILE ROTATION POLICY
+==================================================
+- Manual Export ("حفظ قاعدة البيانات الآن"): Trigger a folder/file save picker allowing the user to select the destination for manual exports.
+- Max 20 Backups Retention:
+  * Timestamp each auto-backup file (e.g., `yousifi_auto_backup_YYYY-MM-DD_HH-mm.json`).
+  * Add a configurable setting in Settings: **"أقصى عدد للنسخ التلقائية الاحتياطية"** (default set to **20**).
+  * Whenever a new auto-backup is created, count the backup files in the currently selected directory. If the count exceeds 20, automatically delete the oldest backup file(s) in that directory.
+
+==================================================
+4. HELPER TEXT & PACKAGING
+==================================================
+- Add clear helper info in Settings:
+  * "مجلد النسخ والتلقائي: مجلد التطبيق افتراضياً، ويمكن تغييره لمجلد أخر (مثل Google Drive)."
+  * "الاستعادة التلقائية تقرأ دائماً من المجلد المحدد حالياً للنسخ التلقائي."
+- Run `npm run build` and `npx cap sync android`.
+- Re-package the complete updated repository into `yousifi-soft-github.zip` for GitHub Actions deployment.

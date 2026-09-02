@@ -1,0 +1,31 @@
+HOME PAGE CARDS UI FIX: TITLE UPDATES & DARK MODE CARD BACKGROUND COLORS
+
+Please apply the following two critical UI/UX fixes on the Home Page:
+
+==================================================
+1. CARD TITLES REPLACEMENT & CLEANUP
+==================================================
+Completely REPLACE the main title of each of the 4 bottom grid cards (remove the old overarching labels like "رصيد الصندوق", "ديون العملاء", etc., and promote the new specific labels as the primary title):
+
+- Card 1: Change main title to **"مبيعات اليوم نقداً"** (Remove old title "رصيد الصندوق" and redundant subtext).
+- Card 2: Change main title to **"مبيعات اليوم دين"** (Remove old title "ديون العملاء" and redundant subtext).
+- Card 3: Change main title to **"دين تم تسديده اليوم"** (Remove old title "للمورد" and redundant subtext).
+- Card 4: Change main title to **"مبيعات اليوم"** (Remove old title "المخزون الحالي". Show the sold card count, total value, and profit clearly below this main title).
+
+==================================================
+2. DARK MODE CARD BACKGROUND COLOR CONTRAST FIX
+==================================================
+- Currently, when switching to Dark Mode, all 4 cards revert to a dark monochromatic background (`.dark:bg-slate-900`) making them blend in dark mode while looking vibrant in light mode.
+- Restore distinct, aesthetically pleasing background colors for each card in BOTH Light Mode and Dark Mode (e.g., subtle tinted dark cards with rich contrast for Dark Mode):
+  * Card 1 (Cash Sales): Tinted Emerald / Green slate accent.
+  * Card 2 (Credit Sales): Tinted Amber / Orange slate accent.
+  * Card 3 (Repayments): Tinted Rose / Red slate accent.
+  * Card 4 (Sales/Stock Summary): Tinted Blue / Indigo slate accent.
+- Ensure all text, numbers, and currency labels inside the cards remain high-contrast and perfectly readable in both modes.
+
+==================================================
+3. CHANGELOG & BUILD
+==================================================
+- Auto-increment version in `src/data/changelog.ts` and log this Home Page UI fix.
+- Run `npm run build` and `npx cap sync android`.
+- Compress updated project into `yousifi-soft-github.zip` ready for GitHub Actions build.

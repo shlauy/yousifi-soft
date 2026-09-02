@@ -1,0 +1,37 @@
+STRICT UI/UX FIX: CUSTOMER PROFILE CARD BACKGROUND & COLOR PALETTE OVERHAUL
+
+Fix the Customer Profile Detail page (`/customers/:id` or Customer Profile component) header card design. The header card currently uses an unappealing dark navy background block that violates design consistency in both Light and Dark modes.
+
+Apply the following mandatory styling rules strictly:
+
+==================================================
+1. LIGHT MODE CUSTOMER CARD REDESIGN
+==================================================
+- REMOVE the dark navy background block completely in Light Mode.
+- Use a soft, clean, elevated light card background (`bg-white` or `bg-slate-50`) with a subtle border (`border border-slate-200`) and modern soft shadow (`shadow-sm`).
+- Primary Text (Customer Name, Phone, Labels): Use dark slate typography (`text-slate-900` / `text-slate-700`).
+- Avatar Circle: Use a subtle accent background (`bg-amber-100 text-amber-700` or `bg-slate-200 text-slate-800`).
+- Credit Limit Badge: Use `bg-slate-100 text-slate-600 border border-slate-200`.
+- Current Debt Highlight: Display the debt amount clearly in high-contrast vibrant orange/amber (`text-amber-600` or `text-red-600` if debt > 0) with clear readable font weight.
+
+==================================================
+2. DARK MODE CUSTOMER CARD REDESIGN
+==================================================
+- Set the card background in Dark Mode to match the system card dark theme (`dark:bg-slate-800/90` or `dark:bg-slate-800`), bordered by `dark:border-slate-700/60`.
+- Primary Text: Set to pure white (`dark:text-white`) and soft gray (`dark:text-slate-300`).
+- Avatar Circle: Set to `dark:bg-slate-700 dark:text-slate-100`.
+- Credit Limit Badge: Set to `dark:bg-slate-700/50 dark:text-slate-300`.
+- Current Debt Highlight: Bright high-contrast amber/orange (`dark:text-amber-400`).
+
+==================================================
+3. QUICK ACTION BUTTONS & CARDS HARMONIZATION
+==================================================
+- Ensure the Action Buttons below the profile card (Partial Debt Settlement, Full Settlement, SMS, WhatsApp) and the Quick Sale Cards use fully matching background tones in both Light and Dark modes.
+- Light Mode Buttons: Clean light background (`bg-white` / `bg-slate-100`) with clear dark text, except primary CTA (Partial Settlement) which remains vibrant orange (`bg-amber-500 text-white`).
+- Dark Mode Buttons: Consistent `dark:bg-slate-800 dark:border-slate-700` with white text.
+
+==================================================
+4. BUILD & VERIFY
+==================================================
+- Update `src/data/changelog.ts` with this Customer Profile UI redesign.
+- Execute `npm run build` to ensure no TypeScript or CSS errors exist.

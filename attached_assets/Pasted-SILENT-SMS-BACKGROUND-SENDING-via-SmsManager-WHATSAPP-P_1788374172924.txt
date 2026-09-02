@@ -1,0 +1,46 @@
+SILENT SMS BACKGROUND SENDING via SmsManager, WHATSAPP PACKAGE SELECTOR & BULK SMS MODULE
+
+Please implement silent background SMS sending, WhatsApp default app selector, and Bulk SMS dispatch features:
+
+==================================================
+1. ANDROID NATIVE SILENT SMS MANAGER
+==================================================
+- Update Android Native Plugin / Java Bridge (`android/app/src/main/java/...`) to support direct background SMS sending using Android's `SmsManager`.
+- Ensure `android.permission.SEND_SMS` is requested dynamically if not granted.
+- On single customer view: Clicking "إرسال SMS" directly dispatches the SMS in the background without opening the external SMS app, followed by a success Toast/Notification.
+
+==================================================
+2. WHATSAPP DEFAULT PACKAGE SELECTOR IN SETTINGS
+==================================================
+- In `/settings`, add a dropdown setting: **"تطبيق الواتساب الافتراضي"** (Default WhatsApp App) with options:
+  * الواتساب الرسمي (`com.whatsapp`)
+  * واتساب الأعمال (`com.whatsapp.w4b`)
+  * النسخة الافتراضية للنظام (System Default Intent)
+- Store this selection and use its specific package name whenever triggering WhatsApp share/message intents.
+
+==================================================
+3. DASHBOARD MESSAGING CARDS RESTRUCTURING
+==================================================
+- In the Control Panel / Dashboard:
+  - Rename the existing card "رسالة تذكير الديون" to **"نموذج الرسائل الفردية"** (Individual Message Template).
+  - Add a new card below it titled **"نموذج الرسائل الجماعية SMS"** (Bulk SMS Template).
+  - The Bulk SMS card contains:
+    * A text area for the message template with instructions for variable usage (e.g., `{الاسم}`).
+    * Three targeted bulk send buttons:
+      1. **أصحاب الدين** (Sends SMS only to customers with outstanding balance > 0).
+      2. **بدون دين** (Sends SMS only to customers with zero balance).
+      3. **جميع العملاء** (Sends SMS to all registered contacts).
+  - Dynamic Variable Replacement: Before sending each SMS in the loop, automatically replace `{الاسم}` or `{اسم_العميل}` with the recipient customer's actual name.
+  - Display a clean Progress Bar / Status Modal showing real-time dispatch progress (e.g. "جاري إرسال 12 من 50...").
+
+==================================================
+4. CHANGELOG & VERSION BUMP
+==================================================
+- Automatically increment version in `src/data/changelog.ts` and add a new entry detailing these SMS and WhatsApp updates as per system rules.
+
+==================================================
+5. BUILD & PACKAGE FOR GITHUB ACTIONS
+==================================================
+- Run full build: `npm run build`
+- Sync Capacitor assets: `npx cap sync android`
+- Compress complete repository into `yousifi-soft-github.zip` ready for GitHub Actions build.
